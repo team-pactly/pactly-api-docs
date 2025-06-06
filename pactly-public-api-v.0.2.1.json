@@ -14,11 +14,6 @@
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-logo": {
-      "url": "https://www.pactly.com/pactly-logo.png",
-      "backgroundColor": "#FFFFFF",
-      "altText": "Pactly logo"
-    }
   },
   "servers": [
     {

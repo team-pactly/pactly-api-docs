@@ -21,8 +21,23 @@
       .api-header {
         background-color: #156CEF;
         color: white;
-        padding: 20px 40px;
+        padding: 20px 0;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      
+      .api-header-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .api-header-left {
+        display: flex;
+        align-items: center;
+        gap: 15px;
       }
       
       .api-header h1 {
@@ -30,19 +45,27 @@
         font-size: 24px;
         font-weight: 700;
         font-family: 'Montserrat', sans-serif;
+        color: white;
       }
       
       .api-header p {
-        margin: 8px 0 0 0;
+        margin: 0;
         font-size: 14px;
         opacity: 0.9;
         font-family: 'Roboto', sans-serif;
+      }
+      
+      .api-header-nav {
+        display: flex;
+        gap: 30px;
+        align-items: center;
       }
       
       .api-header a {
         color: white;
         text-decoration: none;
         opacity: 0.9;
+        font-weight: 500;
       }
       
       .api-header a:hover {
@@ -54,13 +77,38 @@
       #redoc-container {
         margin-top: 0;
       }
+      
+      /* Hide the API info section in the sidebar using attribute selectors */
+      /* This is more stable than class-based selectors */
+      [role="navigation"] > div:first-child {
+        display: none !important;
+      }
+      
+      /* Alternative: If you want to keep some spacing */
+      [role="navigation"] > div:first-child {
+        visibility: hidden !important;
+        height: 0 !important;
+        overflow: hidden !important;
+      }
     </style>
   </head>
   <body>
     <!-- Custom header -->
     <div class="api-header">
-      <h1>Pactly API Reference</h1>
-      <p>Version 0.2.0 | <a href="./">Back to Introduction</a></p>
+      <div class="api-header-content">
+        <div class="api-header-left">
+          <img src="./assets/pactly-logo.png" alt="Pactly" style="height: 28px; width: auto;" onerror="this.style.display='none'">
+          <div>
+            <h1>Pactly API Reference</h1>
+            <p>Version 0.2.0</p>
+          </div>
+        </div>
+        <nav class="api-header-nav">
+          <a href="./">Home</a>
+          <a href="./introduction.html">Introduction</a>
+          <a href="https://www.pactly.com" target="_blank">Pactly Website</a>
+        </nav>
+      </div>
     </div>
     
     <!-- Redoc container -->

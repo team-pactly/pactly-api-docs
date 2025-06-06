@@ -35,10 +35,46 @@
             padding: 0 20px;
         }
         
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            height: 32px;
+            width: auto;
+        }
+        
         .header h1 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 700;
+            margin: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            opacity: 1;
         }
         
         .main {
@@ -168,7 +204,17 @@
 <body>
     <header class="header">
         <div class="container">
-            <h1>Pactly API Documentation</h1>
+            <div class="header-content">
+                <div class="logo-section">
+                    <img src="./assets/pactly-logo.png" alt="Pactly" class="logo" onerror="this.style.display='none'">
+                    <h1>Pactly API Documentation</h1>
+                </div>
+                <nav class="nav-links">
+                    <a href="./">Home</a>
+                    <a href="./api-reference.html">API Reference</a>
+                    <a href="https://www.pactly.com" target="_blank">Pactly Website</a>
+                </nav>
+            </div>
         </div>
     </header>
     

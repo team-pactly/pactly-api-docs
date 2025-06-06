@@ -39,15 +39,29 @@
             align-items: center;
         }
         
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            height: 28px;
+            width: auto;
+        }
+        
         .header h1 {
             font-family: 'Montserrat', sans-serif;
             font-size: 24px;
             font-weight: 700;
+            margin: 0;
+            color: white;
         }
         
         .nav-links {
             display: flex;
             gap: 30px;
+            align-items: center;
         }
         
         .nav-links a {
@@ -176,7 +190,10 @@
 <body>
     <header class="header">
         <div class="header-content">
-            <h1>Pactly API Documentation</h1>
+            <div class="logo-section">
+                <img src="./assets/pactly-logo.png" alt="Pactly" class="logo" onerror="this.style.display='none'">
+                <h1>Pactly API Documentation</h1>
+            </div>
             <nav class="nav-links">
                 <a href="./">Home</a>
                 <a href="./api-reference.html">API Reference</a>
