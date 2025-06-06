@@ -65,7 +65,7 @@ API requests are subject to rate limiting to ensure service stability. Current l
 
 For API support, please contact:
 - Email: developers@pactly.com
-- Documentation: [API Reference](/api-reference)
+- Documentation: [API Reference](./api-reference.html)
 
 ## Roadmap
 
