@@ -1,0 +1,30 @@
+{
+    "name": "pactly-api-docs",
+    "version": "0.2.0",
+    "description": "Pactly API Documentation",
+    "private": true,
+    "scripts": {
+      "preview": "redocly preview-docs pactly-public-api-v.0.2.1.json",
+      "lint": "redocly lint pactly-public-api-v.0.2.1.json",
+      "build": "redocly build-docs pactly-public-api-v.0.2.1.json -o dist/api-docs.html",
+      "serve": "npx http-server -p 8080",
+      "validate": "redocly lint pactly-public-api-v.0.2.1.json --format=stylish"
+    },
+    "keywords": [
+      "pactly",
+      "api",
+      "documentation",
+      "openapi",
+      "redoc"
+    ],
+    "author": "Pactly",
+    "license": "Apache-2.0",
+    "devDependencies": {
+      "@redocly/cli": "^1.6.0",
+      "http-server": "^14.1.1"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/pactly/pactly-api-docs.git"
+    }
+  }

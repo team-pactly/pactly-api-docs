@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pactly API Reference</title>
+    <!-- needed for adaptive design -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Pactly API Reference Documentation - RESTful API for contract management">
+    
+    <!-- Fonts for Redoc -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
+
+    <!-- Custom styles -->
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      
+      /* Custom header */
+      .api-header {
+        background-color: #156CEF;
+        color: white;
+        padding: 20px 40px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      
+      .api-header h1 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 700;
+        font-family: 'Montserrat', sans-serif;
+      }
+      
+      .api-header p {
+        margin: 8px 0 0 0;
+        font-size: 14px;
+        opacity: 0.9;
+        font-family: 'Roboto', sans-serif;
+      }
+      
+      .api-header a {
+        color: white;
+        text-decoration: none;
+        opacity: 0.9;
+      }
+      
+      .api-header a:hover {
+        opacity: 1;
+        text-decoration: underline;
+      }
+      
+      /* Redoc container */
+      #redoc-container {
+        margin-top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Custom header -->
+    <div class="api-header">
+      <h1>Pactly API Reference</h1>
+      <p>Version 0.2.0 | <a href="/">Back to Introduction</a></p>
+    </div>
+    
+    <!-- Redoc container -->
+    <div id="redoc-container"></div>
+    
+    <!-- Redoc standalone script -->
+    <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"></script>
+    
+    <!-- Initialize Redoc -->
+    <script>
+      Redoc.init('./pactly-public-api-v.0.2.1.json', {
+        theme: {
+          colors: {
+            primary: {
+              main: '#156CEF'
+            }
+          },
+          typography: {
+            fontSize: '14px',
+            lineHeight: '1.6',
+            headings: {
+              fontFamily: 'Montserrat, sans-serif',
+              fontWeight: '700'
+            },
+            body: {
+              fontFamily: 'Roboto, sans-serif'
+            },
+            code: {
+              fontSize: '13px',
+              fontFamily: 'Monaco, Consolas, "Courier New", monospace'
+            }
+          },
+          sidebar: {
+            backgroundColor: '#F7F9FB',
+            textColor: '#192029',
+            groupItems: {
+              textTransform: 'uppercase'
+            }
+          },
+          rightPanel: {
+            backgroundColor: '#192029'
+          }
+        },
+        scrollYOffset: 0,
+        hideDownloadButton: false,
+        disableSearch: false,
+        noAutoAuth: false,
+        pathInMiddlePanel: true,
+        requiredPropsFirst: true,
+        sortPropsAlphabetically: false,
+        showExtensions: true,
+        hideHostname: false,
+        expandResponses: '200,201',
+        generateCodeSamples: {
+          languages: [
+            {
+              lang: 'curl',
+              label: 'cURL'
+            },
+            {
+              lang: 'python',
+              label: 'Python'
+            },
+            {
+              lang: 'javascript',
+              label: 'JavaScript'
+            },
+            {
+              lang: 'ruby', 
+              label: 'Ruby'
+            }
+          ]
+        }
+      }, document.getElementById('redoc-container'));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,751 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Pactly Public API",
+    "description": "The Pactly API provides programmatic access to your contract management data. Use this API to retrieve contracts, download documents, and integrate Pactly with your business systems. This is a read-only API focused on data retrieval. Write operations and webhooks are coming soon.",
+    "termsOfService": "https://www.pactly.com/terms",
+    "contact": {
+      "name": "Pactly Developer Support",
+      "url": "https://www.pactly.com",
+      "email": "developers@pactly.com"
+    },
+    "version": "0.2.0",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "x-logo": {
+      "url": "https://www.pactly.com/pactly-logo.png",
+      "backgroundColor": "#FFFFFF",
+      "altText": "Pactly logo"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.pactly.ai/",
+      "description": "Production API"
+    },
+    {
+      "url": "https://api-staging.pactly.com/",
+      "description": "Staging API"
+    },
+    {
+      "url": "https://api-uat.pactly.com/",
+      "description": "UAT API"
+    }
+  ],
+  "externalDocs": {
+    "description": "Find more information about Pactly",
+    "url": "https://www.pactly.com"
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Contracts",
+      "description": "Operations related to contract management. Pactly manages three types of contracts: Template Contracts (generated from templates), Playbook Contracts (third-party contracts reviewed against playbooks), and External Contracts (uploaded external documents)."
+    },
+    {
+      "name": "Templates",
+      "description": "Operations related to contract templates. Templates are pre-defined contract structures that can be used to generate new contracts with consistent language and formatting."
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "API Key",
+        "description": "Enter your API key in the format: Bearer YOUR_API_KEY"
+      }
+    },
+    "parameters": {
+      "AttributeFilterParam": {
+        "in": "query",
+        "name": "_*_",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "To filter results based on a particular attribute, specify a query parameter with the same name as the attribute defined on your model. For instance, if our `Purchase` model has an `amount` attribute, we could send `GET /purchase?amount=99.99` to return a list of $99.99 purchases."
+      },
+      "WhereQueryParam": {
+        "in": "query",
+        "name": "where",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Instead of filtering based on a specific attribute, you may instead choose to provide a `where` parameter with the WHERE piece of a [Waterline criteria](https://sailsjs.com/documentation/concepts/models-and-orm/query-language), _encoded as a JSON string_. This allows you to take advantage of `contains`, `startsWith`, and other sub-attribute criteria modifiers for more powerful `find()` queries.\n\ne.g. `?where={\"name\":{\"contains\":\"theodore\"}}`"
+      },
+      "LimitQueryParam": {
+        "in": "query",
+        "name": "limit",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 30,
+          "minimum": 1,
+          "maximum": 100
+        },
+        "description": "The maximum number of records to send back (useful for pagination). Defaults to 30, maximum is 100."
+      },
+      "SkipQueryParam": {
+        "in": "query",
+        "name": "skip",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "description": "The number of records to skip (useful for pagination)."
+      },
+      "SortQueryParam": {
+        "in": "query",
+        "name": "sort",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "The sort order. By default, returned records are sorted by primary key value in ascending order.\n\ne.g. `?sort=lastName%20ASC`"
+      }
+    },
+    "schemas": {
+      "Contract": {
+        "type": "object",
+        "description": "Contract object representing any of the three contract types in Pactly",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the contract",
+            "example": "507f1f77bcf86cd799439011"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["template", "playbook", "external"],
+            "description": "Type of contract: template (generated from Pactly templates), playbook (third-party contracts), or external (uploaded documents)",
+            "example": "template"
+          },
+          "name": {
+            "type": "string",
+            "description": "Contract name",
+            "example": "Sample NDA Agreement"
+          },
+          "reference": {
+            "type": "string",
+            "description": "Contract reference number (format is customizable per company)",
+            "example": "NDA-2024-001"
+          },
+          "status": {
+            "type": "integer",
+            "description": "Contract status: 1=Draft, 2=In Negotiation, 3=Pending Approval, 4=Pending Signature, 5=Executed, 6=Terminated",
+            "enum": [1, 2, 3, 4, 5, 6],
+            "example": 5
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Whether the contract has been archived",
+            "example": false
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "Whether the contract has been deleted",
+            "example": false
+          },
+          "aborted": {
+            "type": "boolean",
+            "description": "Whether the contract has been aborted",
+            "example": false
+          },
+          "final": {
+            "type": "boolean",
+            "description": "Whether the contract has been finalized",
+            "example": true
+          },
+          "user": {
+            "type": "string",
+            "description": "ID of the user who owns the contract",
+            "example": "507f1f77bcf86cd799439012"
+          },
+          "requester": {
+            "type": "string",
+            "description": "ID of the user who requested the contract",
+            "example": "507f1f77bcf86cd799439013"
+          },
+          "group": {
+            "type": "string",
+            "description": "ID of the group the contract belongs to",
+            "example": "507f1f77bcf86cd799439014"
+          },
+          "category": {
+            "type": "string",
+            "description": "ID of the contract category",
+            "example": "507f1f77bcf86cd799439015"
+          },
+          "template": {
+            "type": "string",
+            "description": "ID of the template (for template contracts only)",
+            "example": "507f1f77bcf86cd799439016"
+          },
+          "playbook": {
+            "type": "string",
+            "description": "ID of the playbook (for playbook contracts only)",
+            "example": "507f1f77bcf86cd799439017"
+          },
+          "properties": {
+            "type": "object",
+            "description": "Contract properties and metadata",
+            "additionalProperties": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the contract was created",
+            "example": "2024-01-15T10:30:00Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the contract was last updated",
+            "example": "2024-01-20T14:45:00Z"
+          },
+          "finalizedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the contract was finalized",
+            "example": "2024-01-18T16:00:00Z"
+          },
+          "executedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the contract was executed",
+            "example": "2024-01-20T14:45:00Z"
+          },
+          "executionMethod": {
+            "type": "string",
+            "description": "Method used to execute the contract",
+            "enum": ["upload", "docusign", "adobesign", "signwell"],
+            "example": "docusign"
+          }
+        },
+        "required": ["id", "type", "name", "status"],
+        "additionalProperties": true
+      },
+      "Template": {
+        "type": "object",
+        "description": "Template object for generating contracts",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the template",
+            "example": "507f1f77bcf86cd799439012"
+          },
+          "name": {
+            "type": "string",
+            "description": "Template name",
+            "example": "Standard NDA Template"
+          },
+          "description": {
+            "type": "string",
+            "description": "Template description",
+            "example": "Non-disclosure agreement template for vendor relationships"
+          },
+          "version": {
+            "type": "string",
+            "description": "Template version in semver format",
+            "example": "1.2.3"
+          },
+          "category": {
+            "type": "string",
+            "description": "Template category (e.g., NDA, MSA)",
+            "example": "NDA"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the template was created",
+            "example": "2024-01-10T09:00:00Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the template was last updated",
+            "example": "2024-01-15T16:30:00Z"
+          }
+        },
+        "required": ["id", "name", "description"],
+        "additionalProperties": true
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "Error code",
+                "example": "UNAUTHORIZED"
+              },
+              "message": {
+                "type": "string",
+                "description": "Error message",
+                "example": "Invalid API key provided"
+              }
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "UnauthorizedError": {
+        "description": "Authentication information is missing or invalid",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "NotFoundError": {
+        "description": "The requested resource was not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "BadRequestError": {
+        "description": "Invalid request parameters",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "InternalServerError": {
+        "description": "Internal server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/v1/test": {
+      "get": {
+        "summary": "Test API connectivity",
+        "description": "Test endpoint to verify API connectivity and authentication. Use this endpoint to confirm your API key is valid and the API is accessible.",
+        "operationId": "testConnection",
+        "tags": [],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Test successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "API connection successful"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/v1/contracts": {
+      "get": {
+        "summary": "List contracts",
+        "description": "Retrieve a list of all contracts accessible to your organization. Results include all three contract types (template, playbook, and external). Use query parameters to filter and paginate results.",
+        "operationId": "listContracts",
+        "tags": ["Contracts"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/LimitQueryParam"
+          },
+          {
+            "$ref": "#/components/parameters/SkipQueryParam"
+          },
+          {
+            "$ref": "#/components/parameters/SortQueryParam"
+          },
+          {
+            "$ref": "#/components/parameters/WhereQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of contracts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Contract"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/v1/contracts/{id}": {
+      "get": {
+        "summary": "Get contract details",
+        "description": "Retrieve detailed information about a specific contract, including all metadata and properties.",
+        "operationId": "getContract",
+        "tags": ["Contracts"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Contract ID",
+            "example": "507f1f77bcf86cd799439011"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Contract details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "contract": {
+                      "$ref": "#/components/schemas/Contract"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/v1/contracts/{id}/text": {
+      "get": {
+        "summary": "Get contract text",
+        "description": "Extract and retrieve the full text content of a contract document. This endpoint is useful for text analysis, search indexing, or integration with other systems that need to process contract content.",
+        "operationId": "getContractText",
+        "tags": ["Contracts"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Contract ID",
+            "example": "507f1f77bcf86cd799439011"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Contract text content",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "description": "The extracted text content of the contract"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/v1/contracts/{id}/download": {
+      "get": {
+        "summary": "Download contract file",
+        "description": "Download the original contract document in its native format (e.g., PDF, DOCX). Returns the file with appropriate content-type headers.",
+        "operationId": "downloadContract",
+        "tags": ["Contracts"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Contract ID",
+            "example": "507f1f77bcf86cd799439011"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Contract file",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/vnd.openxmlformats-officedocument.wordprocessingml.document": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/v1/templates": {
+      "get": {
+        "summary": "List templates",
+        "description": "Retrieve a list of all contract templates available in your organization. Templates can be used to generate new contracts programmatically.",
+        "operationId": "listTemplates",
+        "tags": ["Templates"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/LimitQueryParam"
+          },
+          {
+            "$ref": "#/components/parameters/SkipQueryParam"
+          },
+          {
+            "$ref": "#/components/parameters/SortQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of templates",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Template"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/v1/contracts/generate": {
+      "post": {
+        "summary": "Generate contract from template",
+        "description": "Generate a new contract from a template by providing values for template variables. This endpoint is planned for the v1.0 release.",
+        "operationId": "generateContract",
+        "tags": ["Contracts"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "Contract generation parameters",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "templateId": {
+                    "type": "string",
+                    "description": "ID of the template to use"
+                  },
+                  "values": {
+                    "type": "object",
+                    "description": "Values for template variables",
+                    "additionalProperties": true
+                  }
+                },
+                "required": ["templateId", "values"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Contract generated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contract"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "description": "Not implemented - This feature is coming in v1.0",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/contract-set-from-values": {
+      "post": {
+        "summary": "Create contract set from values",
+        "description": "Create a set of related contracts from provided values. This endpoint is planned for the v1.0 release.",
+        "operationId": "createContractSet",
+        "tags": ["Contracts"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "Contract set parameters",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Contract set created successfully"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "description": "Not implemented - This feature is coming in v1.0",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

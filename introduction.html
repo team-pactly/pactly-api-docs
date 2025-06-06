@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pactly API Documentation - Getting Started</title>
+    <meta name="description" content="Get started with the Pactly API - Authentication, endpoints, and integration guide">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #F7F9FB;
+            color: #192029;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background-color: #156CEF;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            opacity: 1;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        .content {
+            background: white;
+            border-radius: 8px;
+            padding: 60px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+        
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #192029;
+        }
+        
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: #192029;
+        }
+        
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: #192029;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #4D5866;
+        }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+            color: #4D5866;
+        }
+        
+        code {
+            background-color: #F7F9FB;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
+            font-size: 14px;
+            color: #E74C3C;
+        }
+        
+        pre {
+            background-color: #192029;
+            color: #E6F0FF;
+            padding: 20px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        
+        pre code {
+            background-color: transparent;
+            color: #E6F0FF;
+            padding: 0;
+        }
+        
+        strong {
+            font-weight: 700;
+            color: #192029;
+        }
+        
+        a {
+            color: #156CEF;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        a:hover {
+            color: #0F4FA8;
+            text-decoration: underline;
+        }
+        
+        .highlight-box {
+            background-color: #E6F0FF;
+            border-left: 4px solid #156CEF;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #9EA9B8;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>Pactly API Documentation</h1>
+            <nav class="nav-links">
+                <a href="/">Home</a>
+                <a href="/api-reference.html">API Reference</a>
+                <a href="https://www.pactly.com" target="_blank">Pactly Website</a>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="content">
+            <h1>Pactly API Documentation</h1>
+            
+            <p>Welcome to the Pactly API documentation. The Pactly API provides programmatic access to contract management functionality, enabling you to integrate Pactly with your existing business systems and automate your contract workflows.</p>
+            
+            <h2>Overview</h2>
+            
+            <p>The Pactly API is a RESTful web service that allows you to:</p>
+            
+            <ul>
+                <li><strong>Access contract data</strong> - Retrieve information about your contracts, including metadata, properties, and status</li>
+                <li><strong>Download documents</strong> - Get contract files in their original format or extract text content for analysis</li>
+                <li><strong>List templates</strong> - Access your contract templates for integration with external systems</li>
+                <li><strong>Generate contracts</strong> - Create new contracts from templates programmatically <em>(coming soon)</em></li>
+                <li><strong>Receive real-time updates</strong> - Get notified about contract events via webhooks <em>(coming soon)</em></li>
+            </ul>
+            
+            <h2>Current API Version</h2>
+            
+            <p>The current version of the Pactly API is <strong>v0.2.0</strong>. This is a read-only API that focuses on retrieving contract and template information. Write operations and webhook functionality are planned for future releases.</p>
+            
+            <h2>Getting Started</h2>
+            
+            <p>To use the Pactly API, you'll need:</p>
+            
+            <ol>
+                <li><strong>API Key</strong> - Contact your Pactly administrator to obtain an API key for your organization</li>
+                <li><strong>API Endpoint</strong> - Use the appropriate endpoint for your environment:
+                    <ul>
+                        <li>Production: <code>https://api.pactly.ai/</code></li>
+                        <li>Staging: <code>https://api-staging.pactly.com/</code></li>
+                        <li>UAT: <code>https://api-uat.pactly.com/</code></li>
+                    </ul>
+                </li>
+            </ol>
+            
+            <h2>Authentication</h2>
+            
+            <p>The Pactly API uses Bearer token authentication. Include your API key in the Authorization header of all requests:</p>
+            
+            <pre><code>Authorization: Bearer YOUR_API_KEY</code></pre>
+            
+            <h2>Contract Types</h2>
+            
+            <p>Pactly manages three types of contracts, all accessible through the same API endpoints:</p>
+            
+            <ul>
+                <li><strong>Template Contracts</strong> - Generated from pre-defined templates within Pactly</li>
+                <li><strong>Playbook Contracts</strong> - Third-party contracts reviewed against your organization's playbooks</li>
+                <li><strong>External Contracts</strong> - External documents uploaded to the system for tracking</li>
+            </ul>
+            
+            <h2>Response Format</h2>
+            
+            <p>All API responses are in JSON format. Contract responses include a <code>type</code> field to identify the contract type:</p>
+            
+            <pre><code>{
+  "_id": "contract-id",
+  "type": "template", // or "playbook" or "external"
+  "name": "Contract Name",
+  "reference": "2024-0001",
+  "status": 5, // 1=Draft, 2=In Negotiation, 3=Pending Approval, 4=Pending Signature, 5=Executed, 6=Terminated
+  // ... additional fields
+}</code></pre>
+            
+            <h2>Rate Limiting</h2>
+            
+            <p>API requests are subject to rate limiting to ensure service stability. Current limits will be communicated when you receive your API key.</p>
+            
+            <h2>Support</h2>
+            
+            <p>For API support, please contact:</p>
+            <ul>
+                <li>Email: <a href="mailto:developers@pactly.com">developers@pactly.com</a></li>
+                <li>Documentation: <a href="/api-reference.html">API Reference</a></li>
+            </ul>
+            
+            <h2>Roadmap</h2>
+            
+            <p>We're actively developing new API capabilities based on customer needs:</p>
+            
+            <h3>Coming Soon (v1.0)</h3>
+            <ul>
+                <li>Contract generation from templates</li>
+                <li>Contract property updates</li>
+                <li>Webhook notifications for contract events</li>
+                <li>Expanded search and filtering capabilities</li>
+            </ul>
+            
+            <h3>Future Enhancements</h3>
+            <ul>
+                <li>Playbook management</li>
+                <li>Form submissions via API</li>
+                <li>Bulk operations</li>
+                <li>GraphQL endpoint</li>
+            </ul>
+            
+            <p>Stay tuned for updates as we expand the API functionality to better serve your integration needs.</p>
+            
+            <div class="highlight-box">
+                <p><strong>Ready to get started?</strong> Check out the <a href="/api-reference.html">API Reference</a> for detailed endpoint documentation and interactive examples.</p>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <p>&copy; 2024 Pactly. All rights reserved. | <a href="https://www.pactly.com/terms">Terms of Service</a></p>
+    </footer>
+</body>
+</html>

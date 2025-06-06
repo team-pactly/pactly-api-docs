@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pactly API Documentation</title>
+    <meta name="description" content="Pactly API Documentation - RESTful API for contract management">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #F7F9FB;
+            color: #192029;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background-color: #156CEF;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+        }
+        
+        .main {
+            flex: 1;
+            padding: 60px 0;
+        }
+        
+        .intro {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .intro h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #192029;
+        }
+        
+        .intro p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #4D5866;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+        }
+        
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            background-color: #E6F0FF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #192029;
+        }
+        
+        .card p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #4D5866;
+        }
+        
+        .card-action {
+            margin-top: 20px;
+            color: #156CEF;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .footer {
+            background-color: #192029;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer p {
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+        
+        .footer a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer a:hover {
+            opacity: 1;
+        }
+        
+        /* Icons */
+        .icon-book::before {
+            content: "📚";
+            font-size: 30px;
+        }
+        
+        .icon-api::before {
+            content: "🔌";
+            font-size: 30px;
+        }
+        
+        .icon-code::before {
+            content: "💻";
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>Pactly API Documentation</h1>
+        </div>
+    </header>
+    
+    <main class="main">
+        <div class="container">
+            <div class="intro">
+                <h2>Build Powerful Integrations with Pactly</h2>
+                <p>Access your contract data programmatically, automate workflows, and integrate Pactly with your business systems using our RESTful API.</p>
+            </div>
+            
+            <div class="cards">
+                <a href="./introduction" class="card">
+                    <div class="card-icon">
+                        <span class="icon-book"></span>
+                    </div>
+                    <h3>Getting Started</h3>
+                    <p>Learn about the Pactly API, authentication, and how to make your first API call.</p>
+                    <span class="card-action">Read Introduction →</span>
+                </a>
+                
+                <a href="./api-reference.html" class="card">
+                    <div class="card-icon">
+                        <span class="icon-api"></span>
+                    </div>
+                    <h3>API Reference</h3>
+                    <p>Explore all available endpoints with interactive documentation and code examples.</p>
+                    <span class="card-action">View API Reference →</span>
+                </a>
+                
+                <a href="https://github.com/pactly/pactly-api-docs" class="card" target="_blank">
+                    <div class="card-icon">
+                        <span class="icon-code"></span>
+                    </div>
+                    <h3>Code Examples</h3>
+                    <p>Find sample code and integration examples on our GitHub repository.</p>
+                    <span class="card-action">View on GitHub →</span>
+                </a>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Pactly. All rights reserved.</p>
+            <p>
+                <a href="https://www.pactly.com">Website</a> · 
+                <a href="https://app.pactly.ai">Platform Login</a> · 
+                <a href="mailto:developers@pactly.com">Contact Support</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
