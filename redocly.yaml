@@ -5,114 +5,107 @@ apis:
   pactly@v0.2.0:
     root: ./pactly-public-api-v.0.2.1.json
 
-# Theme configuration
-theme:
-  openapi:
-    # Disable search if you want to use a custom search solution
-    disableSearch: false
-    
-    # Expand specific response codes by default
-    expandResponses: 200,201
-    
-    # JSON sample expansion level
-    jsonSamplesExpandLevel: 2
-    
-    # Show request samples alongside response samples
-    payloadSampleIdx: 0
-    
-    # Hide the hostname in try-it console
-    hideHostname: false
-    
-    # Show extensions (x-* fields)
-    showExtensions: true
-    
-    # Sort properties alphabetically
-    sortPropsAlphabetically: false
-    
-    # Required properties first
-    requiredPropsFirst: true
-    
-    # Path in middle panel
-    pathInMiddlePanel: true
-    
-    # Hide download button
-    hideDownloadButton: false
-    
-    # Theme customization
-    theme:
-      # Colors matching Pactly brand
-      colors:
-        primary:
-          main: '#156CEF'
-        success:
-          main: '#24A89B'
-        warning:
-          main: '#F5A623'
-        error:
-          main: '#E74C3C'
-        text:
-          primary: '#192029'
-          secondary: '#4D5866'
-        border:
-          dark: '#E4E7EB'
-          light: '#F7F9FB'
-      
-      # Typography
-      typography:
-        fontSize: 14px
-        lineHeight: 1.6
-        headings:
-          fontFamily: 'Montserrat, sans-serif'
-          fontWeight: 700
-        body:
-          fontFamily: 'Roboto, sans-serif'
-          fontWeight: 400
-        code:
-          fontSize: 13px
-          fontFamily: 'Monaco, Consolas, "Courier New", monospace'
-          color: '#E74C3C'
-          backgroundColor: '#F7F9FB'
-      
-      # Sidebar styling
-      sidebar:
-        backgroundColor: '#F7F9FB'
-        textColor: '#192029'
-        activeTextColor: '#156CEF'
-        groupItems:
-          textTransform: uppercase
-        arrow:
-          size: 1.5em
-          color: '#4D5866'
-      
-      # Right panel (code samples)
-      rightPanel:
-        backgroundColor: '#192029'
-        textColor: '#FFFFFF'
-      
-      # Logo configuration
-      logo:
-        maxHeight: 40px
-        maxWidth: 200px
-        
-    # Code sample generation
-    generateCodeSamples:
-      languages:
-        - lang: curl
-          label: cURL
-        - lang: python  
-          label: Python
-        - lang: javascript
-          label: JavaScript
-        - lang: ruby
-          label: Ruby
-        - lang: php
-          label: PHP
-        - lang: go
-          label: Go
-        - lang: csharp
-          label: C#
-        - lang: java
-          label: Java
+# Theme configuration (moved to root level as required by Redocly hosting)
+# Disable search if you want to use a custom search solution
+disableSearch: false
+
+# Expand specific response codes by default
+expandResponses: 200,201
+
+# JSON sample expansion level
+jsonSamplesExpandLevel: 2
+
+# Show request samples alongside response samples
+payloadSampleIdx: 0
+
+# Hide the hostname in try-it console
+hideHostname: false
+
+# Show extensions (x-* fields)
+showExtensions: true
+
+# Sort properties alphabetically
+sortPropsAlphabetically: false
+
+# Required properties first
+requiredPropsFirst: true
+
+# Path in middle panel
+pathInMiddlePanel: true
+
+# Hide download button
+hideDownloadButton: false
+
+# Colors matching Pactly brand
+colors:
+  primary:
+    main: '#156CEF'
+  success:
+    main: '#24A89B'
+  warning:
+    main: '#F5A623'
+  error:
+    main: '#E74C3C'
+  text:
+    primary: '#192029'
+    secondary: '#4D5866'
+  border:
+    dark: '#E4E7EB'
+    light: '#F7F9FB'
+
+# Typography
+typography:
+  fontSize: 14px
+  lineHeight: 1.6
+  headings:
+    fontFamily: 'Montserrat, sans-serif'
+    fontWeight: 700
+  body:
+    fontFamily: 'Roboto, sans-serif'
+    fontWeight: 400
+  code:
+    fontSize: 13px
+    fontFamily: 'Monaco, Consolas, "Courier New", monospace'
+    color: '#E74C3C'
+    backgroundColor: '#F7F9FB'
+
+# Sidebar styling
+sidebar:
+  backgroundColor: '#F7F9FB'
+  textColor: '#192029'
+  activeTextColor: '#156CEF'
+  groupItems:
+    textTransform: uppercase
+
+# Right panel (code samples)
+rightPanel:
+  backgroundColor: '#192029'
+  textColor: '#FFFFFF'
+
+# Logo configuration
+logo:
+  maxHeight: 40px
+  maxWidth: 200px
+
+# Code sample generation
+generateCodeSamples:
+  languages:
+    - lang: curl
+      label: cURL
+    - lang: python  
+      label: Python
+    - lang: javascript
+      label: JavaScript
+    - lang: ruby
+      label: Ruby
+    - lang: php
+      label: PHP
+    - lang: go
+      label: Go
+    - lang: csharp
+      label: C#
+    - lang: java
+      label: Java
 
 # Navbar configuration
 navbar:
@@ -120,7 +113,7 @@ navbar:
     - label: Introduction
       href: /
     - label: API Reference
-      href: /api-reference
+      page: api-reference
     - label: Pactly Website
       href: https://www.pactly.com
       external: true
