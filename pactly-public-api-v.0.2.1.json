@@ -35,9 +35,6 @@
     },
     {
       "name": "Templates"
-    },
-    {
-      "name": "PublicApi"
     }
   ],
   "components": {
@@ -3434,9 +3431,9 @@
           "lastPollDate": {
             "type": "string",
             "format": "date",
-            "default": "2025-07-13T22:43:10.153Z",
+            "default": "2025-07-14T03:59:47.389Z",
             "description": "The date of the last poll",
-            "example": "2025-07-13T22:43:10.153Z"
+            "example": "2025-07-14T03:59:47.389Z"
           },
           "templatecontract": {
             "description": "JSON dictionary representing the **templatecontract** instance or FK when creating / updating / not populated",
@@ -9214,16 +9211,42 @@
         }
       }
     },
-    "/v1/contract-set-from-values": {
+    "/v1/contracts/generate": {
       "post": {
-        "summary": "/v1/contract-set-from-values",
+        "summary": "Generate contract",
+        "description": "Generate a new contract from a template",
         "tags": [
-          "PublicApi"
+          "Contracts"
         ],
         "parameters": [],
         "responses": {
           "200": {
-            "description": "The requested resource"
+            "description": "Contract generated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Contract ID"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Contract name"
+                    },
+                    "template": {
+                      "type": "string",
+                      "description": "Template ID"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                }
+              }
+            }
           },
           "400": {
             "description": "Bad request",
@@ -9261,16 +9284,41 @@
         }
       }
     },
-    "/v1/contracts/generate": {
+    "/v1/contracts/set-from-values": {
       "post": {
-        "summary": "/v1/contracts/generate",
+        "summary": "Generate contract set from values",
+        "description": "Generate a set of contracts based on provided values",
         "tags": [
-          "PublicApi"
+          "Contracts"
         ],
         "parameters": [],
         "responses": {
           "200": {
-            "description": "The requested resource"
+            "description": "Contract set generated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "contractId": {
+                        "type": "string",
+                        "description": "Contract ID"
+                      },
+                      "templateId": {
+                        "type": "string",
+                        "description": "Template ID"
+                      },
+                      "templateName": {
+                        "type": "string",
+                        "description": "Template name"
+                      }
+                    }
+                  }
+                }
+              }
+            }
           },
           "400": {
             "description": "Bad request",
@@ -9386,9 +9434,10 @@
             "name": "id",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "pattern": "^[0-9a-fA-F]{24}$"
             },
-            "description": "Route pattern variable `id`"
+            "description": "Contract ID (MongoDB ObjectId format)"
           }
         ],
         "responses": {
@@ -9440,9 +9489,10 @@
     },
     "/v1/contracts/{id}/download": {
       "get": {
-        "summary": "/v1/contracts/{id}/download",
+        "summary": "Download contract",
+        "description": "Download a contract file by ID",
         "tags": [
-          "PublicApi"
+          "Contracts"
         ],
         "parameters": [
           {
@@ -9450,14 +9500,29 @@
             "name": "id",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "pattern": "^[0-9a-fA-F]{24}$"
             },
-            "description": "Route pattern variable `id`"
+            "description": "Contract ID (MongoDB ObjectId format)"
           }
         ],
         "responses": {
           "200": {
-            "description": "The requested resource"
+            "description": "Contract file download",
+            "content": {
+              "application/vnd.openxmlformats-officedocument.wordprocessingml.document": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
           },
           "400": {
             "description": "Bad request",
