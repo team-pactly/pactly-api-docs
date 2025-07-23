@@ -68,10 +68,10 @@ The current API version is **v0.2.0** and includes the following endpoints:
 
 ## Authentication
 
-All API endpoints require Bearer token authentication:
+All API endpoints require API key authentication:
 
 ```
-Authorization: Bearer YOUR_API_KEY
+x-api-key: YOUR_API_KEY
 ```
 
 ## Deployment

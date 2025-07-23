@@ -23,15 +23,15 @@ To use the Pactly API, you'll need:
 1. **API Key** - Contact your Pactly administrator to obtain an API key for your organization
 2. **API Endpoint** - Use the appropriate endpoint for your environment:
    - Production: `https://api.pactly.ai/`
-   - Staging: `https://api-staging.pactly.com/`
+   - Staging: `https://staging-api.pactly.com/`
    - UAT: `https://api-uat.pactly.com/`
 
 ## Authentication
 
-The Pactly API uses Bearer token authentication. Include your API key in the Authorization header of all requests:
+The Pactly API uses API key authentication. Include your API key in the x-api-key header of all requests:
 
 ```
-Authorization: Bearer YOUR_API_KEY
+x-api-key: YOUR_API_KEY
 ```
 
 ## Contract Types

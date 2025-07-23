@@ -233,7 +233,7 @@
                 <li><strong>API Endpoint</strong> - Use the appropriate endpoint for your environment:
                     <ul>
                         <li>Production: <code>https://api.pactly.ai/</code></li>
-                        <li>Staging: <code>https://api-staging.pactly.com/</code></li>
+                        <li>Staging: <code>https://staging-api.pactly.com/</code></li>
                         <li>UAT: <code>https://api-uat.pactly.com/</code></li>
                     </ul>
                 </li>
@@ -241,9 +241,9 @@
             
             <h2>Authentication</h2>
             
-            <p>The Pactly API uses Bearer token authentication. Include your API key in the Authorization header of all requests:</p>
+            <p>The Pactly API uses API key authentication. Include your API key in the x-api-key header of all requests:</p>
             
-            <pre><code>Authorization: Bearer YOUR_API_KEY</code></pre>
+            <pre><code>x-api-key: YOUR_API_KEY</code></pre>
             
             <h2>Contract Types</h2>
             
