@@ -14,17 +14,15 @@ The Pactly API is a RESTful web service that allows you to:
 
 ## Current API Version
 
-The current version of the Pactly API is **v0.2.0**. This is a read-only API that focuses on retrieving contract and template information. Write operations and webhook functionality are planned for future releases.
+The current version of the Pactly API is **v0.2.1**. This is a read-only API that focuses on retrieving contract and template information. Write operations and webhook functionality are planned for future releases.
 
 ## Getting Started
 
 To use the Pactly API, you'll need:
 
 1. **API Key** - Contact your Pactly administrator to obtain an API key for your organization
-2. **API Endpoint** - Use the appropriate endpoint for your environment:
+2. **API Endpoint** - Use the production endpoint:
    - Production: `https://api.pactly.ai/`
-   - Staging: `https://staging-api.pactly.com/`
-   - UAT: `https://api-uat.pactly.com/`
 
 ## Authentication
 

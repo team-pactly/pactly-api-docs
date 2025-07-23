@@ -55,7 +55,7 @@ pactly-api-docs/
 
 ## API Specification
 
-The current API version is **v0.2.0** and includes the following endpoints:
+The current API version is **v0.2.1** and includes the following endpoints:
 
 - `GET /v1/test` - Test endpoint for connectivity
 - `GET /v1/contracts` - List all contracts
@@ -73,6 +73,8 @@ All API endpoints require API key authentication:
 ```
 x-api-key: YOUR_API_KEY
 ```
+
+**Production Endpoint:** `https://api.pactly.ai/`
 
 ## Deployment
 
